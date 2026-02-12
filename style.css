@@ -88,11 +88,11 @@ body {
   backdrop-filter: blur(10px);
 }
 
-button:hover, a:hover, .link-container li:hover {
+button:hover, a:hover {
   cursor: none;
 }
 
-button, a, .link-container li {
+button, a {
   cursor: none;
 }
 
@@ -391,6 +391,7 @@ nav button i.rotated {
   font-family: 'AironeFont';
   text-align: left;
   transition: color 0.3s ease;
+  cursor: pointer;
 }
 
 .link-container li:hover {
