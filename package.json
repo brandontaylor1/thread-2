@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "gh-pages": "^6.3.0",
+    "gsap": "^3.14.2",
+    "motion": "^12.34.0"
+  },
+  "name": "thread-2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "devDependencies": {
+    "vite": "^7.3.1"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "deploy": "vite build && gh-pages -d dist"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
