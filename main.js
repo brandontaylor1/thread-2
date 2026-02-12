@@ -9,6 +9,8 @@ const buttons = document.querySelectorAll("button");
 const links = document.querySelectorAll("a");
 const linkContainerLinks = document.querySelectorAll(".link-container li");
 const linkContentInfoLinks = document.querySelectorAll(".link-content");
+const filterButtons = document.querySelectorAll('.filter-btn');
+const projectCards = document.querySelectorAll('.project-card');
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
 // Scroll progress bar
@@ -278,6 +280,28 @@ document.addEventListener("DOMContentLoaded", function() {
         });
       });
     }
+  }
+
+  if (filterButtons.length && projectCards.length) {
+    const applyProjectFilter = (filterValue) => {
+      projectCards.forEach((card) => {
+        const category = card.dataset.category;
+        const shouldShow = filterValue === 'all' || category === filterValue;
+
+        card.style.display = shouldShow ? '' : 'none';
+      });
+    };
+
+    filterButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        filterButtons.forEach((btn) => btn.classList.remove('active'));
+        button.classList.add('active');
+        applyProjectFilter(button.dataset.filter || 'all');
+      });
+    });
+
+    const activeFilterButton = document.querySelector('.filter-btn.active');
+    applyProjectFilter(activeFilterButton?.dataset.filter || 'all');
   }
 });
 
