@@ -365,6 +365,11 @@ nav button i.rotated {
   margin-bottom: 1rem;
 }
 
+.link-content.active img,
+.link-content.active p {
+  opacity: 1;
+}
+
 .active {
   display: flex;
   flex-direction: column;
@@ -560,7 +565,7 @@ footer {
     height: 100vh;
     background: 
       linear-gradient(135deg, rgba(10, 10, 10, 0.7) 0%, rgba(26, 26, 26, 0.8) 50%, rgba(10, 10, 10, 0.7) 100%),
-      url('./images/taiki-ishikawa-Q9JHncNMY-0-unsplash.jpg');
+      url('/images/taiki-ishikawa-Q9JHncNMY-0-unsplash.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
