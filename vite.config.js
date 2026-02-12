@@ -11,6 +11,8 @@ export default defineConfig({
                 main: resolve(__dirname, 'index.html'),
                 studio: resolve(__dirname, 'studio.html'),
                 approach: resolve(__dirname, 'approach.html'),
+                projects: resolve(__dirname, 'projects.html'),
+                contact: resolve(__dirname, 'contact.html'),
             },
         },
     },
