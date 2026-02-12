@@ -9,6 +9,7 @@ const buttons = document.querySelectorAll("button");
 const links = document.querySelectorAll("a");
 const linkContainerLinks = document.querySelectorAll(".link-container li");
 const linkContentInfoLinks = document.querySelectorAll(".link-content");
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
 // Scroll progress bar
 function updateScrollProgress() {
@@ -111,32 +112,32 @@ document.addEventListener("DOMContentLoaded", function() {
     document.body.style.cursor = 'auto';
   }
 
-  // GSAP Animations
-  const bigText = document.querySelector('.big-hero-text');
-  const mainContentSection = document.querySelector('.main-content');
+  // GSAP + Motion One animations (skip if user prefers reduced motion)
+  if (!prefersReducedMotion.matches) {
+    const bigText = document.querySelector('.big-hero-text');
+    const mainContentSection = document.querySelector('.main-content');
 
-  if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-    gsap.registerPlugin(ScrollTrigger);
-    
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: mainContentSection,
-        start: 'top bottom',
-        end: 'bottom bottom',
-        scrub: 0.5,
-        ease: 'power1.inOut'
-      }
-    });
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      gsap.registerPlugin(ScrollTrigger);
 
-    tl.to(bigText, {
-      y: '-30%',
-      opacity: 0.8
-    });
-  }
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: mainContentSection,
+          start: 'top bottom',
+          end: 'bottom bottom',
+          scrub: 0.5,
+          ease: 'power1.inOut'
+        }
+      });
 
-  // Motion One Animations (using global Motion object from CDN)
-  if (typeof Motion !== 'undefined') {
-    const { inView, animate, stagger } = Motion;
+      tl.to(bigText, {
+        y: '-30%',
+        opacity: 0.8
+      });
+    }
+
+    if (typeof Motion !== 'undefined') {
+      const { inView, animate, stagger } = Motion;
 
     // About section animations
     inView('.about-grid .left-container', () => {
@@ -266,22 +267,28 @@ document.addEventListener("DOMContentLoaded", function() {
       });
     });
 
-    // Footer animation
-    inView('.footer-grid', () => {
-      animate('.footer-grid .footer', {
-        opacity: [0, 1],
-        y: [-50, 0]
-      }, {
-        duration: 0.8,
-        delay: stagger(0.1)
+      // Footer animation
+      inView('.footer-grid', () => {
+        animate('.footer-grid .footer', {
+          opacity: [0, 1],
+          y: [-50, 0]
+        }, {
+          duration: 0.8,
+          delay: stagger(0.1)
+        });
       });
-    });
+    }
   }
 });
 
 // Discipline link switching
-linkContainerLinks.forEach((link, index) => {
+linkContainerLinks.forEach((link) => {
   link.addEventListener('click', () => {
+    const targetIndex = Number.parseInt(link.dataset.index, 10);
+    if (!Number.isInteger(targetIndex) || !linkContentInfoLinks[targetIndex]) {
+      return;
+    }
+
     // Remove active class from all links and content
     linkContainerLinks.forEach((l) => {
       l.classList.remove('active');
@@ -293,15 +300,15 @@ linkContainerLinks.forEach((link, index) => {
     
     // Add active class to clicked link and corresponding content
     link.classList.add('active');
-    linkContentInfoLinks[index].classList.remove('hidden'); 
-    linkContentInfoLinks[index].classList.add('active');
+    linkContentInfoLinks[targetIndex].classList.remove('hidden');
+    linkContentInfoLinks[targetIndex].classList.add('active');
     
     // On mobile, scroll to content after selection
     if (window.innerWidth <= 768) {
       setTimeout(() => {
-        linkContentInfoLinks[index].scrollIntoView({ 
-          behavior: 'smooth', 
-          block: 'center' 
+        linkContentInfoLinks[targetIndex].scrollIntoView({
+          behavior: 'smooth',
+          block: 'center'
         });
       }, 300);
     }

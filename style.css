@@ -27,6 +27,17 @@ body {
   cursor: none;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
 .progress-container {
   height: 100%;
   width: 20px;
