@@ -315,10 +315,11 @@ nav button i.rotated {
   display: grid;
   grid-template-columns: .5fr 1fr;
   grid-template-rows: auto auto;
+  align-items: start;
   gap: 4rem;
   width: 100%;
   padding: 5rem 0rem 0rem 0rem;
-  height: 150vh;
+  min-height: 150vh;
 }
 
 .top-left-container h3 {
@@ -341,12 +342,12 @@ nav button i.rotated {
 
 .bottom-left-container {
   position: sticky;
-  top: 20vh;
+  top: 0;
+  align-self: start;
 }
 
 .link-content {
-  position: sticky;
-  top: 20vh;
+  position: relative;
   padding: 3rem 0;
 }
 

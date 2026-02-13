@@ -136,6 +136,19 @@ document.addEventListener("DOMContentLoaded", function() {
         y: '-30%',
         opacity: 0.8
       });
+
+      const disciplinesGrid = document.querySelector('.main-grid');
+      const disciplinesLeftPanel = document.querySelector('.bottom-left-container');
+
+      if (disciplinesGrid && disciplinesLeftPanel && window.innerWidth > 768) {
+        ScrollTrigger.create({
+          trigger: disciplinesGrid,
+          start: 'top top',
+          end: 'bottom bottom',
+          pin: disciplinesLeftPanel,
+          pinSpacing: false
+        });
+      }
     }
 
     if (typeof Motion !== 'undefined') {
